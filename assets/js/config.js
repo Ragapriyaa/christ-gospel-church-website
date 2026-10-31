@@ -4,9 +4,9 @@ window.CGC = {
   city: 'Coimbatore',
   address: {
     line1: '6, Sesi Avenue West, Church Road',
-    line2: 'Cheran Ma Nagar Post, Coimbatore',
+    line2: 'Cheranma Nagar Post, Coimbatore',
     line3: 'Tamil Nadu 641051',
-    mapQuery: 'Christ Gospel Church, Sesi Avenue West, Church Road, Cheran Ma Nagar, Coimbatore, Tamil Nadu 641051',
+    mapQuery: 'Christ Gospel Church, Sesi Avenue West, Church Road, Cheranma Nagar, Coimbatore, Tamil Nadu 641051',
   },
   phones: [
     { display: '095787 78787', tel: '+919578778787' },
