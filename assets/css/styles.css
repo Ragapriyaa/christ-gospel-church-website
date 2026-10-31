@@ -154,18 +154,16 @@ html[lang='ta'] .hero h1 { line-height: .88; font-stretch: 75%; }
 .hero h1 span { display: block; color: #ff6b70; }
 .hero .lede { margin-top: 1.4rem; color: var(--on-dark); max-width: 31em; }
 .hero .btn-row { margin-top: 1.8rem; }
-.hero-art { position: relative; z-index: 1; display: grid; place-items: center; }
-.globe-wrap { position: relative; width: min(100%, 470px); aspect-ratio: 1 / 1.21; container-type: inline-size; }
-.globe-wrap canvas { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; aspect-ratio: 1; }
-/* The rotating cross from the church roof, built as two solid beams and placed as on the emblem:
-   in front of the globe, with the crossbar just above it and the foot short of its base. */
-.hero-cross { position: absolute; inset: 0 0 auto; height: 106.7cqw; perspective: 260cqw; pointer-events: none; }
-.hero-cross::before { content: ''; position: absolute; left: 50%; top: 50%; width: 60cqw; height: 110cqw; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(200, 30, 39, .32), transparent); }
+.hero-art { position: relative; z-index: 1; display: grid; justify-items: center; gap: 16px; }
+.globe-wrap { position: relative; width: min(100%, 480px); aspect-ratio: 680 / 620; container-type: inline-size; }
+.emblem-art { display: block; width: 100%; height: 100%; overflow: visible; }
+/* The church emblem with its rotating cross. Sizes follow assets/img/logo.jpg, where 100cqw is 680 logo pixels. */
+.hero-cross { position: absolute; inset: 0; perspective: 400cqw; perspective-origin: 50% 40%; pointer-events: none; }
 .cross-spin { position: absolute; inset: 0; transform-style: preserve-3d; animation: cross-spin 12s linear infinite; }
 @keyframes cross-spin { to { transform: rotateY(360deg); } }
 .beam { position: absolute; left: 50%; top: var(--y); width: var(--w); height: var(--h); margin-left: calc(var(--w) / -2); transform-style: preserve-3d; }
-.beam-post { --w: 8.3cqw; --h: 106.7cqw; --d: 8.3cqw; --y: 0cqw; }
-.beam-arm { --w: 30.6cqw; --h: 9.1cqw; --d: 7.8cqw; --y: 10.4cqw; }
+.beam-post { --w: 3.68cqw; --h: 31.2cqw; --d: 3.68cqw; --y: 15.15cqw; }
+.beam-arm { --w: 14.56cqw; --h: 3.82cqw; --d: 3.4cqw; --y: 20.44cqw; }
 .beam i { position: absolute; display: block; }
 .beam i:nth-child(1), .beam i:nth-child(2) { inset: 0; background: linear-gradient(#e2272f, #bd1a22); }
 .beam i:nth-child(1) { transform: translateZ(calc(var(--d) / 2)); }
@@ -176,7 +174,7 @@ html[lang='ta'] .hero h1 { line-height: .88; font-stretch: 75%; }
 .beam i:nth-child(5), .beam i:nth-child(6) { left: 0; right: 0; top: calc((var(--h) - var(--d)) / 2); height: var(--d); }
 .beam i:nth-child(5) { background: #ef4e56; transform: rotateX(90deg) translateZ(calc(var(--h) / 2)); }
 .beam i:nth-child(6) { background: #7f0f16; transform: rotateX(-90deg) translateZ(calc(var(--h) / 2)); }
-.status-card { position: absolute; right: -14px; bottom: 2%; width: clamp(170px, 44%, 230px); padding: 16px 18px; background: var(--paper); color: var(--text); border-radius: var(--radius); border-top: 5px solid var(--red); box-shadow: 0 18px 44px rgba(0, 0, 0, .35); z-index: 3; }
+.status-card { position: relative; width: min(100%, 480px); padding: 14px 18px; background: var(--paper); color: var(--text); border-radius: var(--radius); border-top: 5px solid var(--red); box-shadow: 0 18px 44px rgba(0, 0, 0, .35); z-index: 3; }
 .status-label { font-family: var(--font-display); font-weight: 600; font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; color: var(--red); display: flex; align-items: center; gap: .5em; }
 html[lang='ta'] .status-label { letter-spacing: 0; font-size: 1rem; }
 .status-when { font-family: var(--font-display); font-size: 1.2rem; font-stretch: 90%; line-height: 1.2; color: var(--ink); margin-top: .35em; }
@@ -188,10 +186,17 @@ html[lang='ta'] .status-label { letter-spacing: 0; font-size: 1rem; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(200, 30, 39, .55); } 70% { box-shadow: 0 0 0 10px rgba(200, 30, 39, 0); } 100% { box-shadow: 0 0 0 0 rgba(200, 30, 39, 0); } }
 html[lang='ta'] .status-when strong { font-size: 1.6rem; }
 @media (max-width: 1100px) {
-  .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 20px; min-height: 0; padding-block: 32px 28px; }
+  .hero-inner { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 24px; min-height: 0; padding-block: 36px; }
+  .hero h1 { font-size: clamp(2.5rem, 6.6vw, 5.6rem); }
+  .hero .lede { font-size: clamp(1rem, 1.7vw, 1.15rem); }
+  .status-card { padding: 12px 14px; }
+}
+@media (max-width: 600px) {
+  .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-block: 32px 28px; }
+  .hero h1 { font-size: clamp(3.4rem, 15vw, 5.6rem); }
   .hero-art { display: contents; }
-  .globe-wrap { order: -1; justify-self: center; width: min(44vw, 240px); margin-bottom: 14px; }
-  .status-card { position: relative; inset: auto; width: 100%; max-width: 420px; }
+  .globe-wrap { order: -1; justify-self: center; width: min(76vw, 340px); margin-bottom: 8px; }
+  .status-card { justify-self: start; max-width: 420px; padding: 14px 18px; }
 }
 
 /* Ribbon, taken from the band across the emblem */

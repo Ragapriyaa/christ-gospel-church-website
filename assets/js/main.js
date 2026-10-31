@@ -1,4 +1,4 @@
-// Page behaviour: language switch, service status, videos, calendar, prayer form, globe.
+// Page behaviour: language switch, service status, videos, calendar, prayer form.
 (function () {
   const C = window.CGC;
   const VIDEOS = window.CGC_VIDEOS || [];
@@ -413,85 +413,6 @@
     el.src = C.logo;
     el.onerror = () => { el.onerror = null; el.src = 'assets/img/emblem.svg'; };
   });
-
-  /* ---------- Hero globe: the emblem's lines of longitude, turning slowly ---------- */
-  const canvas = $('#globe');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    const TILT = -0.32;
-    const STEP = Math.PI / 12;
-    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let spin = 0.6;
-    let visible = true;
-    let last = 0;
-
-    function project(lat, lon, radius, cx, cy) {
-      const x = Math.cos(lat) * Math.sin(lon + spin);
-      const y = Math.sin(lat);
-      const z = Math.cos(lat) * Math.cos(lon + spin);
-      return [cx + radius * x, cy - radius * (y * Math.cos(TILT) - z * Math.sin(TILT)), y * Math.sin(TILT) + z * Math.cos(TILT)];
-    }
-
-    function drawCurve(points, front, back) {
-      for (let i = 1; i < points.length; i++) {
-        const target = points[i][2] >= 0 ? front : back;
-        target.moveTo(points[i - 1][0], points[i - 1][1]);
-        target.lineTo(points[i][0], points[i][1]);
-      }
-    }
-
-    function draw() {
-      const ratio = Math.min(devicePixelRatio || 1, 2);
-      const size = canvas.clientWidth;
-      if (!size) return;
-      if (canvas.width !== Math.round(size * ratio)) {
-        canvas.width = Math.round(size * ratio);
-        canvas.height = Math.round(size * ratio);
-      }
-      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-      ctx.clearRect(0, 0, size, size);
-      const center = size / 2;
-      const radius = size / 2 - 2;
-      const front = new Path2D();
-      const back = new Path2D();
-      for (let lon = 0; lon < Math.PI * 2; lon += STEP) {
-        const points = [];
-        for (let lat = -Math.PI / 2; lat <= Math.PI / 2 + 0.01; lat += 0.08) points.push(project(lat, lon, radius, center, center));
-        drawCurve(points, front, back);
-      }
-      for (let lat = -Math.PI / 2 + STEP; lat < Math.PI / 2; lat += STEP) {
-        const points = [];
-        for (let lon = 0; lon <= Math.PI * 2 + 0.01; lon += 0.08) points.push(project(lat, lon, radius, center, center));
-        drawCurve(points, front, back);
-      }
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = 'rgba(255,255,255,.09)';
-      ctx.stroke(back);
-      ctx.strokeStyle = 'rgba(255,255,255,.42)';
-      ctx.stroke(front);
-      ctx.beginPath();
-      ctx.arc(center, center, radius, 0, Math.PI * 2);
-      ctx.lineWidth = 1.5;
-      ctx.strokeStyle = 'rgba(255,255,255,.6)';
-      ctx.stroke();
-    }
-
-    function tick(time) {
-      if (visible && time - last > 40) {
-        spin += (time - last) * 0.00005;
-        last = time;
-        draw();
-      }
-      requestAnimationFrame(tick);
-    }
-
-    draw();
-    window.addEventListener('resize', draw);
-    if (!still) {
-      new IntersectionObserver(entries => { visible = entries[0].isIntersecting; }).observe(canvas);
-      requestAnimationFrame(tick);
-    }
-  }
 
   applyLanguage();
 })();
