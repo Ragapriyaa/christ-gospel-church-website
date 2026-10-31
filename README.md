@@ -12,7 +12,7 @@ Then open http://localhost:5173. Use this rather than double-clicking `index.htm
 
 ## The live website
 
-The site is live at https://https://ragapriyaa.github.io/christ-gospel-church-website/ through GitHub Pages. Every push to the `main` branch updates it within a few minutes.
+The site is live at https://ragapriyaa.github.io/christ-gospel-church-website/ through GitHub Pages. Every push to the `main` branch updates it within a few minutes.
 
 ## Where to change things
 
