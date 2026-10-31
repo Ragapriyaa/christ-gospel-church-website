@@ -156,15 +156,15 @@ html[lang='ta'] .hero h1 { line-height: .88; font-stretch: 75%; }
 .hero .btn-row { margin-top: 1.8rem; }
 .hero-art { position: relative; z-index: 1; display: grid; place-items: center; }
 .globe-wrap { position: relative; width: min(100%, 520px); aspect-ratio: 1; container-type: inline-size; }
-.globe-wrap canvas { width: 100%; height: 100%; }
-/* The rotating cross from the church roof, built as two solid beams. */
-.hero-cross { position: absolute; inset: -5cqw 0 -8cqw; perspective: 150cqw; pointer-events: none; }
-.hero-cross::before { content: ''; position: absolute; left: 50%; top: 50%; width: 70cqw; height: 120cqw; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(200, 30, 39, .38), transparent); }
+.globe-wrap canvas { position: relative; z-index: 1; width: 100%; height: 100%; }
+/* The rotating cross from the church roof, built as two solid beams. The globe's lines draw over it, so it sits inside. */
+.hero-cross { position: absolute; inset: 12cqw 0; perspective: 150cqw; pointer-events: none; }
+.hero-cross::before { content: ''; position: absolute; left: 50%; top: 50%; width: 66cqw; height: 84cqw; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(200, 30, 39, .38), transparent); }
 .cross-spin { position: absolute; inset: 0; transform-style: preserve-3d; animation: cross-spin 12s linear infinite; }
 @keyframes cross-spin { to { transform: rotateY(360deg); } }
 .beam { position: absolute; left: 50%; top: var(--y); width: var(--w); height: var(--h); margin-left: calc(var(--w) / -2); transform-style: preserve-3d; }
-.beam-post { --w: 8.5cqw; --h: 113cqw; --d: 8.5cqw; --y: 0cqw; }
-.beam-arm { --w: 35cqw; --h: 9cqw; --d: 8cqw; --y: 24cqw; }
+.beam-post { --w: 7cqw; --h: 76cqw; --d: 7cqw; --y: 0cqw; }
+.beam-arm { --w: 33cqw; --h: 7.5cqw; --d: 6.6cqw; --y: 17cqw; }
 .beam i { position: absolute; display: block; }
 .beam i:nth-child(1), .beam i:nth-child(2) { inset: 0; background: linear-gradient(#e2272f, #bd1a22); }
 .beam i:nth-child(1) { transform: translateZ(calc(var(--d) / 2)); }
@@ -175,7 +175,7 @@ html[lang='ta'] .hero h1 { line-height: .88; font-stretch: 75%; }
 .beam i:nth-child(5), .beam i:nth-child(6) { left: 0; right: 0; top: calc((var(--h) - var(--d)) / 2); height: var(--d); }
 .beam i:nth-child(5) { background: #ef4e56; transform: rotateX(90deg) translateZ(calc(var(--h) / 2)); }
 .beam i:nth-child(6) { background: #7f0f16; transform: rotateX(-90deg) translateZ(calc(var(--h) / 2)); }
-.status-card { position: absolute; right: 0; bottom: 6%; width: min(280px, 62%); padding: 18px 20px; background: var(--paper); color: var(--text); border-radius: var(--radius); border-top: 5px solid var(--red); box-shadow: 0 18px 44px rgba(0, 0, 0, .35); z-index: 3; }
+.status-card { position: absolute; right: -14px; bottom: 2%; width: clamp(170px, 44%, 230px); padding: 16px 18px; background: var(--paper); color: var(--text); border-radius: var(--radius); border-top: 5px solid var(--red); box-shadow: 0 18px 44px rgba(0, 0, 0, .35); z-index: 3; }
 .status-label { font-family: var(--font-display); font-weight: 600; font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; color: var(--red); display: flex; align-items: center; gap: .5em; }
 html[lang='ta'] .status-label { letter-spacing: 0; font-size: 1rem; }
 .status-when { font-family: var(--font-display); font-size: 1.2rem; font-stretch: 90%; line-height: 1.2; color: var(--ink); margin-top: .35em; }
@@ -185,10 +185,11 @@ html[lang='ta'] .status-label { letter-spacing: 0; font-size: 1rem; }
 .status-card .btn { margin-top: .7em; width: 100%; }
 .pulse { width: .7em; height: .7em; border-radius: 50%; background: var(--red); animation: pulse 1.6s infinite; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(200, 30, 39, .55); } 70% { box-shadow: 0 0 0 10px rgba(200, 30, 39, 0); } 100% { box-shadow: 0 0 0 0 rgba(200, 30, 39, 0); } }
-@media (max-width: 860px) {
+html[lang='ta'] .status-when strong { font-size: 1.6rem; }
+@media (max-width: 1100px) {
   .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 20px; min-height: 0; padding-block: 32px 28px; }
   .hero-art { display: contents; }
-  .globe-wrap { order: -1; justify-self: center; width: min(48vw, 210px); margin-bottom: 18px; }
+  .globe-wrap { order: -1; justify-self: center; width: min(48vw, 260px); margin-bottom: 18px; }
   .status-card { position: relative; inset: auto; width: 100%; max-width: 420px; }
 }
 
