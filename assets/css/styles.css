@@ -377,7 +377,7 @@ html[lang='ta'] .page-head h1 { line-height: 1.12; font-size: clamp(2.05rem, 8.2
 .pillars p { margin-top: .5em; color: var(--muted); font-size: 1rem; }
 @media (max-width: 960px) { .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .pillars { grid-template-columns: minmax(0, 1fr); } }
-.leaders { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 24px); }
+.leaders { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2vw, 24px); max-width: 880px; }
 .leader { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .leader-photo { aspect-ratio: 16 / 10; background: var(--indigo-soft); overflow: hidden; }
 .leader-photo img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.36); }
